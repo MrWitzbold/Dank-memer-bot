@@ -27,4 +27,4 @@ async def on_message(message):
             await asyncio.sleep(40)
 
 
-client.run("nah", bot = False)
+client.run("nah", bot = True)
