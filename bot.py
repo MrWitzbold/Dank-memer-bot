@@ -49,6 +49,10 @@ async def on_message(message):
                 await message.channel.send("c")
             if choice == 3:
                 await message.channel.send("d")
+    if "bank robbery" in str(message.content) and str(client.user.name) in str(message.content):
+        await message.channel.send("pls use cell")
+        await asyncio.sleep(2)
+        await message.channel.send("p")
     if message.content == ";start" and str(message.author.id) == "664274363243036682":
         while True:
             await message.channel.send("pls beg")
