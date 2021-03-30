@@ -2,6 +2,7 @@ import discord
 import datetime
 import time
 import asyncio
+import random
 
 client = discord.Client()
 @client.event
@@ -14,6 +15,8 @@ async def on_message(message):
     if "Where do you want to search?" in str(message.content):
         item = str(message.content).split(",")[1].replace(",", "").replace("`", "")
         await message.channel.send(item)
+
+
     found_highlow = False
     embeds = message.embeds
     embed_with_hint = 0
@@ -31,6 +34,23 @@ async def on_message(message):
             await message.channel.send("high")
         if int(number) == 50:
             await message.channel.send("high")
+
+    found_trivia = False
+    trivia_embed = message.embeds
+    for embed in embeds:
+        await asyncio.sleep(1)
+        if "trivia" in str(embed.to_dict()):
+            choice = random.randint(0, 4)
+            if choice == 0:
+                await message.channel.send("a")
+            if choice == 1:
+                await message.channel.send("b")
+            if choice == 2:
+                await message.channel.send("c")
+            if choice == 3:
+                await message.channel.send("d")
+            if choice == 4:
+                await message.channel.send("e")
     if message.content == ";start" and str(message.author.id) == "664274363243036682":
         while True:
             await message.channel.send("pls beg")
@@ -48,7 +68,9 @@ async def on_message(message):
             await message.channel.send("pls search")
             await asyncio.sleep(2)
             await message.channel.send("pls highlow")
-            await asyncio.sleep(38)
+            await asyncio.sleep(2)
+            await message.channel.send("pls trivia")
+            await asyncio.sleep(36)
 
 
 client.run("nah", bot = False)
