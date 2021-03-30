@@ -40,7 +40,7 @@ async def on_message(message):
     for embed in embeds:
         await asyncio.sleep(1)
         if "trivia" in str(embed.to_dict()):
-            choice = random.randint(0, 4)
+            choice = random.randint(0, 3)
             if choice == 0:
                 await message.channel.send("a")
             if choice == 1:
@@ -49,8 +49,6 @@ async def on_message(message):
                 await message.channel.send("c")
             if choice == 3:
                 await message.channel.send("d")
-            if choice == 4:
-                await message.channel.send("e")
     if message.content == ";start" and str(message.author.id) == "664274363243036682":
         while True:
             await message.channel.send("pls beg")
