@@ -12,18 +12,16 @@ async def on_ready():
 async def on_message(message):
     commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock"]
 
-    commmands_that_require_items = False
+    commmands_that_require_items = True
     botter_id = "820162513873272833"
 
-    if str(message.author.id) == "270904126974590976":
-        print(message.content)
     if "Where do you want to search?" in str(message.content) and str("<@" + botter_id + ">") in str(message.content):
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(1)
         item = str(message.content).split(",")[1].replace(",", "").replace("`", "")
         await message.channel.send(item)
 
     if "type `" in str(message.content).lower() and message.author.id == "270904126974590976":
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(1)
         word = str(message.content).lower().split("type `")[1].replace("`", "")
         await asyncio.sleep(1)
         await message.channel.send(word)
@@ -61,7 +59,7 @@ async def on_message(message):
             if choice == 3:
                 await message.channel.send("d")
     if "bank robbery" in str(message.content) and str(client.user.name) in str(message.content):
-        await asyncio.sleep(1)
+        await asyncio.sleep(0.5)
         await message.channel.send("pls use cell")
         await asyncio.sleep(2)
         await message.channel.send("p")
@@ -85,24 +83,29 @@ async def on_message(message):
                     await asyncio.sleep(1 + random.randint(0, 1))
                     sent_commands += str(random_command) + ";"
                     print(sent_commands)
+
             if commmands_that_require_items:
                 for i in range(0, len(commands_list)):
-                    random_command = random.randint(0, len(commands_list))
+                    random_command = random.randint(0, len(commands_list)-1)
                     same_command = False
                     if str(random_command) not in sent_commands:
                         await message.channel.send(commands_list[random_command])
+                        sent_commands += str(random_command) + ";"
                     else:
                         same_command = True
                         while same_command:
-                            random_command = random.randint(0, len(commands_list))
+                            random_command = random.randint(0, len(commands_list)-1)
                             if str(random_command) not in sent_commands:
                                 same_command = False
                                 await message.channel.send(commands_list[random_command])
-            if random_command == 1 or random_command == 2 or random_command == 3 or random_command == 6:
-                await asyncio.sleep(2)
-            else:
-                await asyncio.sleep(1 + random.randint(0, 2))
-            sent_commands += str(random_command) + ";"
+                                sent_commands += str(random_command) + ";"
+                    if random_command == 6:
+                        await asyncio.sleep(1)
+                        await message.channel.send("i")
+                    if random_command == 1 or random_command == 2 or random_command == 3 or random_command == 6:
+                        await asyncio.sleep(2)
+                    else:
+                        await asyncio.sleep(1 + random.randint(0, 2))
             print(sent_commands)
             if random.randint(1, 5) == 2:
                 await asyncio.sleep(1.5)
