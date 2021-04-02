@@ -10,14 +10,21 @@ async def on_ready():
     print("ready")
 @client.event
 async def on_message(message):
+
+    botter_id = "664274363243036682"
+
     if str(message.author.id) == "270904126974590976":
         print(message.content)
-    if "Where do you want to search?" in str(message.content):
+    if "Where do you want to search?" in str(message.content) and str("<@" + botter_id + ">") in str(message.content):
         item = str(message.content).split(",")[1].replace(",", "").replace("`", "")
         await message.channel.send(item)
 
-
+    if "type `" in str(message.content).lower() and message.author.id == "270904126974590976":
+        word = str(message.content).lower().split("type `")[1].replace("`", "")
+        await asyncio.sleep(1)
+        await message.channel.send(word)
     found_highlow = False
+    found_name_hl = False
     embeds = message.embeds
     embed_with_hint = 0
     for embed in embeds:
