@@ -103,7 +103,10 @@ async def on_message(message):
                         await asyncio.sleep(1 + random.randint(0, 2))
                     sent_commands += str(random_command) + ";"
                     print(sent_commands)
-            await asyncio.sleep(35)
+            if random.randint(1, 5) == 2:
+                await asyncio.sleep(1.5)
+                await message.channel.send("pls dep all")
+            await asyncio.sleep(40)
 
 
 
