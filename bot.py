@@ -36,7 +36,7 @@ async def on_message(message):
             found_highlow = True
             embed_with_hint = str(embed.to_dict())
     if found_highlow:
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(1)
         number = str(embed_with_hint.split("Your hint is ")[1].split(".")[0]).replace("*", "")
         print(number)
         if int(number) > 50:
@@ -49,7 +49,7 @@ async def on_message(message):
     found_trivia = False
     trivia_embed = message.embeds
     for embed in embeds:
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(1)
         if "trivia" in str(embed.to_dict()):
             choice = random.randint(0, 3)
             if choice == 0:
@@ -61,12 +61,13 @@ async def on_message(message):
             if choice == 3:
                 await message.channel.send("d")
     if "bank robbery" in str(message.content) and str(client.user.name) in str(message.content):
-        await asyncio.sleep(1.5)
+        await asyncio.sleep(1)
         await message.channel.send("pls use cell")
         await asyncio.sleep(2)
         await message.channel.send("p")
     if message.content == ";start" and str(message.author.id) == "664274363243036682":
         while True:
+            random_command = 0
             sent_commands = ""
             if commmands_that_require_items is False:
                 for i in range(0, 3):
@@ -97,12 +98,12 @@ async def on_message(message):
                             if str(random_command) not in sent_commands:
                                 same_command = False
                                 await message.channel.send(commands_list[random_command])
-                    if random_command == 1 or random_command == 2 or random_command == 3 or random_command == 6:
-                        await asyncio.sleep(2)
-                    else:
-                        await asyncio.sleep(1 + random.randint(0, 2))
-                    sent_commands += str(random_command) + ";"
-                    print(sent_commands)
+            if random_command == 1 or random_command == 2 or random_command == 3 or random_command == 6:
+                await asyncio.sleep(2)
+            else:
+                await asyncio.sleep(1 + random.randint(0, 2))
+            sent_commands += str(random_command) + ";"
+            print(sent_commands)
             if random.randint(1, 5) == 2:
                 await asyncio.sleep(1.5)
                 await message.channel.send("pls dep all")
