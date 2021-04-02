@@ -98,7 +98,7 @@ async def on_message(message):
         await message.channel.send("pls use cell")
         await asyncio.sleep(2)
         await message.channel.send("p")
-    if message.content == ";start" and str(message.author.id) == "664274363243036682":
+    if message.content == ";start" and str(message.author.id) == botter_id:
         while True:
             random_command = 0
             sent_commands = ""
