@@ -14,7 +14,7 @@ async def on_ready():
 async def on_message(message):
     global items
     global item_ammounts
-    commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock", "pls inv"]
+    commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock"]
 
     commmands_that_require_items = True
     botter_id = "820162513873272833"
