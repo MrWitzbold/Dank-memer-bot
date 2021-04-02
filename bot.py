@@ -3,18 +3,53 @@ import datetime
 import time
 import asyncio
 import random
-
+import re
+items = []
+item_ammounts = []
 client = discord.Client()
 @client.event
 async def on_ready():
     print("ready")
 @client.event
 async def on_message(message):
-    commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock"]
+    global items
+    global item_ammounts
+    commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock", "pls inv"]
 
     commmands_that_require_items = True
     botter_id = "820162513873272833"
 
+    # Getting inventory items into a list
+    found_inventory = False
+    embeds = message.embeds
+    full_embed_text = ""
+    for embed in message.embeds:
+        print("embed: " + str(embed.to_dict()))
+        full_embed_text += str(embed.to_dict())
+    if str(client.user.name) in str(full_embed_text) and "inventory" in str(full_embed_text):
+        print("a")
+        items_raw = re.findall(r'`.+?`', full_embed_text)
+        item_ammounts = []
+        items = []
+        for i in range(0, len(items_raw)):
+            items.append(str(items_raw[i]).replace("`", ""))
+        item_ammounts_raw = re.findall(r'\*.+?\\', full_embed_text)
+        for i in range(0, len(item_ammounts_raw)):
+            if i % 2 == 0:
+                item_ammounts.append(str(item_ammounts_raw[i]).split("─ ")[1].split("\\\\")[0].replace("\\", ""))
+        print(items)
+        print(item_ammounts_raw)
+        print(item_ammounts)
+
+    # Selling all the items in the items list
+    if str(message.content).startswith(";sell page") and str(message.author.id) == botter_id:
+        page = str(message.content).split(";sell page ")[1]
+        await asyncio.sleep(1)
+        await message.channel.send("pls inv " + page)
+        await asyncio.sleep(1.5)
+        for i in range(0, len(items)):
+            await asyncio.sleep(2.5)
+            await message.channel.send("pls sell " + items[i] + " " + item_ammounts[i])
     if "Where do you want to search?" in str(message.content) and str("<@" + botter_id + ">") in str(message.content):
         await asyncio.sleep(1)
         item = str(message.content).split(",")[1].replace(",", "").replace("`", "")
