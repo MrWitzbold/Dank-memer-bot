@@ -52,7 +52,7 @@ async def on_message(message):
             await message.channel.send("pls sell " + items[i] + " " + item_ammounts[i])
     if "Where do you want to search?" in str(message.content) and str("<@" + botter_id + ">") in str(message.content):
         await asyncio.sleep(1)
-        item = str(message.content).split(",")[1].replace(",", "").replace("`", "")
+        item = str(message.content).split(",")[1].replace(",", "").replace("`", "").replace(",", "")
         await message.channel.send(item)
 
     if "type `" in str(message.content).lower() and message.author.id == "270904126974590976":
