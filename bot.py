@@ -142,10 +142,19 @@ async def on_message(message):
                     else:
                         await asyncio.sleep(1 + random.randint(0, 2))
             print(sent_commands)
-            if random.randint(1, 5) == 2:
-                await asyncio.sleep(1.5)
+            time = datetime.datetime.strptime("03/02/21 16:30", "%d/%m/%y %H:%M")
+            if int(time.hour) == 23:
+                await asyncio.sleep(2.5)
                 await message.channel.send("pls dep all")
-            await asyncio.sleep(40)
+                await asyncio.sleep((8*60*60)-2.5)
+            else:
+                if random.randint(1, 5) == 2:
+                    await asyncio.sleep(1.5)
+                    await message.channel.send("pls dep all")
+                if random.randint(1, 10) == 5:
+                    await asyncio.sleep(15*60)
+                else:
+                    await asyncio.sleep(40)
 
 
 
