@@ -16,7 +16,7 @@ async def on_message(message):
     global item_ammounts
     commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock"]
 
-    commmands_that_require_items = False
+    commmands_that_require_items = True
     botter_id = "716742725461868625"
 
     # Getting inventory items into a list
@@ -43,7 +43,7 @@ async def on_message(message):
 
     # Selling all the items in the items list
     if str(message.content).startswith(";sell page") and str(message.author.id) == botter_id:
-        await message.delete(message)
+        await message.delete()
         page = str(message.content).split(";sell page ")[1]
         await asyncio.sleep(1)
         await message.channel.send("pls inv " + page)
@@ -100,7 +100,7 @@ async def on_message(message):
         await asyncio.sleep(2)
         await message.channel.send("p")
     if message.content == ";start" and str(message.author.id) == botter_id:
-        await message.delete(message)
+        await message.delete()
         while True:
             random_command = 0
             sent_commands = ""
