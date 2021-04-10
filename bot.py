@@ -150,7 +150,9 @@ async def on_message(message):
                     print("Waiting 15 minutes")
                     await asyncio.sleep(15*60)
                 else:
+                    print("Waiting 40 seconds")
                     await asyncio.sleep(40)
+                    
 
 
 
