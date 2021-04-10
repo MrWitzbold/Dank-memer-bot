@@ -17,17 +17,15 @@ async def on_message(message):
     commands_list = ["pls beg", "pls search", "pls hl", "pls trivia", "pls hunt", "pls fish", "pls pm", "pls use padlock"]
 
     commmands_that_require_items = True
-    botter_id = "820162513873272833"
+    botter_id = "664274363243036682"
 
     # Getting inventory items into a list
     found_inventory = False
     embeds = message.embeds
     full_embed_text = ""
     for embed in message.embeds:
-        print("embed: " + str(embed.to_dict()))
         full_embed_text += str(embed.to_dict())
     if str(client.user.name) in str(full_embed_text) and "inventory" in str(full_embed_text):
-        print("a")
         items_raw = re.findall(r'`.+?`', full_embed_text)
         item_ammounts = []
         items = []
@@ -37,12 +35,10 @@ async def on_message(message):
         for i in range(0, len(item_ammounts_raw)):
             if i % 2 == 0:
                 item_ammounts.append(str(item_ammounts_raw[i]).split("─ ")[1].split("\\\\")[0].replace("\\", ""))
-        print(items)
-        print(item_ammounts_raw)
-        print(item_ammounts)
 
     # Selling all the items in the items list
     if str(message.content).startswith(";sell page") and str(message.author.id) == botter_id:
+        await message.delete()
         page = str(message.content).split(";sell page ")[1]
         await asyncio.sleep(1)
         await message.channel.send("pls inv " + page)
@@ -71,7 +67,6 @@ async def on_message(message):
     if found_highlow:
         await asyncio.sleep(1)
         number = str(embed_with_hint.split("Your hint is ")[1].split(".")[0]).replace("*", "")
-        print(number)
         if int(number) > 50:
             await message.channel.send("low")
         if int(number) < 50:
@@ -99,6 +94,7 @@ async def on_message(message):
         await asyncio.sleep(2)
         await message.channel.send("p")
     if message.content == ";start" and str(message.author.id) == botter_id:
+        await message.delete()
         while True:
             random_command = 0
             sent_commands = ""
@@ -117,7 +113,6 @@ async def on_message(message):
                                 await message.channel.send(commands_list[random_command])
                     await asyncio.sleep(1 + random.randint(0, 1))
                     sent_commands += str(random_command) + ";"
-                    print(sent_commands)
 
             if commmands_that_require_items:
                 for i in range(0, len(commands_list)):
@@ -141,11 +136,21 @@ async def on_message(message):
                         await asyncio.sleep(2)
                     else:
                         await asyncio.sleep(1 + random.randint(0, 2))
-            print(sent_commands)
-            if random.randint(1, 5) == 2:
-                await asyncio.sleep(1.5)
+            time = datetime.datetime.strptime("03/02/21 16:30", "%d/%m/%y %H:%M")
+            if int(time.hour) == 23:
+                await asyncio.sleep(2.5)
                 await message.channel.send("pls dep all")
-            await asyncio.sleep(40)
+                print("Pretending to sleep")
+                await asyncio.sleep((8*60*60)-2.5)
+            else:
+                if random.randint(1, 5) == 2:
+                    await asyncio.sleep(1.5)
+                    await message.channel.send("pls dep all")
+                if random.randint(1, 10) == 5:
+                    print("Waiting 15 minutes")
+                    await asyncio.sleep(15*60)
+                else:
+                    await asyncio.sleep(40)
 
 
 
