@@ -4,6 +4,9 @@ import time
 import asyncio
 import random
 import re
+
+# WARNING: THIS DOESN'T WORK ANYMORE, THIS PROJECT IS A MESS, AND IT WILL NEVER WORK AGAIN, GOODBYE
+
 items = []
 item_ammounts = []
 client = discord.Client()
